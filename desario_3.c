@@ -93,34 +93,24 @@ Sala* criarSala(char nome[]) {
     return novaSala;
 }
 
-/*
-    explorarSalas()
-    Permite que o jogador explore a árvore binária da mansão.
-    A navegação começa no Hall de entrada e continua até uma sala sem caminhos.
-*/
+// Explorar as salas
 void explorarSalas(Sala *salaAtual) {
     char opcao;
 
     while (salaAtual != NULL) {
         printf("\nVoce esta na sala: %s\n", salaAtual->nome);
-
-        // Verifica se chegou em uma sala sem caminhos
         if (salaAtual->esquerda == NULL && salaAtual->direita == NULL) {
             printf("Voce chegou a um comodo sem saida.\n");
             printf("Fim da exploracao.\n");
             break;
         }
-
         printf("\nCaminhos disponiveis:\n");
-
         if (salaAtual->esquerda != NULL) {
             printf("e - Ir para a esquerda\n");
         }
-
         if (salaAtual->direita != NULL) {
             printf("d - Ir para a direita\n");
         }
-
         printf("s - Sair da exploracao\n");
         printf("Escolha uma opcao: ");
         scanf(" %c", &opcao);
@@ -149,11 +139,7 @@ void explorarSalas(Sala *salaAtual) {
     }
 }
 
-/*
-    liberarMemoria()
-    Libera a memória usada pela árvore.
-    Percorre a árvore em pós-ordem: esquerda, direita e depois a raiz.
-*/
+
 void liberarMemoria(Sala *sala) {
     if (sala == NULL) {
         return;
@@ -164,11 +150,7 @@ void liberarMemoria(Sala *sala) {
     free(sala);
 }
 
-/*
-    main()
-    Monta o mapa inicial da mansão usando uma árvore binária
-    e inicia a exploração a partir do Hall de Entrada.
-*/
+// Mapa da sala
 int main() {
     Sala *hall = criarSala("Hall de Entrada");
 
@@ -184,9 +166,10 @@ int main() {
     hall->esquerda->esquerda->esquerda = criarSala("Sala Secreta");
     hall->direita->direita->direita = criarSala("Deposito Antigo");
 
-    printf("=====================================\n");
+    printf("*********************************\n");
     printf("        DETECTIVE QUEST\n");
-    printf("=====================================\n");
+    
+    printf("*********************************\n");
     printf("Explore a mansao e descubra seus caminhos.\n");
 
     explorarSalas(hall);
